@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Golden Pine Pub — Google Maps SEO Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Commissioner', sans-serif;
+  background: #0a0a0f;
+  color: #e0e0e0;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+.container { max-width: 1100px; width: 100%; }
+
+/* Header */
+.header {
+  border-bottom: 1px solid rgba(233, 69, 96, 0.3);
+  padding-bottom: 24px;
+  margin-bottom: 32px;
+}
+.header h1 {
+  font-size: 36px;
+  font-weight: 900;
+  color: #e94560;
+  letter-spacing: -1px;
+}
+.header .subtitle {
+  font-size: 14px;
+  color: #888;
+  margin-top: 6px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.header .date {
+  font-size: 12px;
+  color: #555;
+  margin-top: 4px;
+}
+
+/* Status Badge */
+.badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.badge.red { background: rgba(233, 69, 96, 0.2); color: #e94560; border: 1px solid rgba(233, 69, 96, 0.4); }
+.badge.green { background: rgba(52, 211, 153, 0.2); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.4); }
+.badge.yellow { background: rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.4); }
+.badge.blue { background: rgba(34, 211, 238, 0.2); color: #22d3ee; border: 1px solid rgba(34, 211, 238, 0.4); }
+
+/* Section */
+.section {
+  background: linear-gradient(135deg, #111120 0%, #0d0d1a 100%);
+  border: 1px solid #1a1a2e;
+  border-radius: 12px;
+  padding: 28px;
+  margin-bottom: 24px;
+}
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #e94560;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-title .icon { font-size: 20px; }
+
+/* Grid layout */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; }
+
+/* Stat Card */
+.stat-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 18px;
+  text-align: center;
+}
+.stat-card .number {
+  font-size: 32px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+}
+.stat-card .number.red { color: #e94560; }
+.stat-card .number.green { color: #34d399; }
+.stat-card .number.amber { color: #fbbf24; }
+.stat-card .label {
+  font-size: 11px;
+  color: #888;
+  margin-top: 6px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Info Row */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.info-row:last-child { border-bottom: none; }
+.info-row .key { color: #888; font-size: 13px; font-weight: 400; }
+.info-row .value { color: #e0e0e0; font-size: 13px; font-weight: 500; text-align: right; }
+
+/* Ranking table */
+.ranking-table { width: 100%; border-collapse: collapse; }
+.ranking-table th {
+  text-align: left;
+  font-size: 11px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.ranking-table td {
+  padding: 10px 12px;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.ranking-table tr:last-child td { border-bottom: none; }
+.status-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+.status-dot.green { background: #34d399; }
+.status-dot.yellow { background: #fbbf24; }
+.status-dot.red { background: #e94560; }
+.status-dot.gray { background: #555; }
+
+/* Recommendations */
+.recommendation {
+  background: rgba(255,255,255,0.02);
+  border-left: 3px solid #e94560;
+  padding: 14px 18px;
+  margin-bottom: 10px;
+  border-radius: 0 8px 8px 0;
+}
+.recommendation .rec-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #e94560;
+  margin-bottom: 4px;
+}
+.recommendation .rec-desc {
+  font-size: 13px;
+  color: #aaa;
+  line-height: 1.5;
+}
+.recommendation .rec-tag {
+  display: inline-block;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-top: 6px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.rec-tag.high { background: rgba(233, 69, 96, 0.2); color: #e94560; }
+.rec-tag.med { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+.rec-tag.low { background: rgba(34, 211, 153, 0.2); color: #34d399; }
+
+/* Competitor block */
+.competitor {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 14px;
+  text-align: center;
+}
+.competitor .name { font-size: 13px; font-weight: 600; color: #e0e0e0; }
+.competitor .detail { font-size: 11px; color: #666; margin-top: 4px; }
+.competitor .rank {
+  font-size: 24px; font-weight: 700;
+  margin-top: 6px;
+}
+.rank-1 { color: #fbbf24; }
+.rank-2 { color: #94a3b8; }
+.rank-3 { color: #854d0e; }
+
+/* Review bar */
+.review-bar-wrap { margin: 6px 0; }
+.review-bar-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 3px; }
+.review-bar-label .rstar { color: #fbbf24; }
+.review-bar-label .rcount { color: #888; }
+.review-bar {
+  height: 6px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.review-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #e94560, #fbbf24);
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  color: #444;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  body { padding: 16px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <div>
+        <h1>NEW GOLDEN PINE PUB</h1>
+        <div class="subtitle">Google Maps SEO Audit &middot; Đà Nẵng</div>
+        <div class="date">07/06/2026 &middot; Nô Tì Report</div>
+      </div>
+      <div>
+        <span class="badge red">⚠ CẦN CẢI THIỆN</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. TỔNG QUAN GBP -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📋</span> Thông Tin Google Business Profile</div>
+    <div class="grid-2">
+      <div>
+        <div class="info-row"><span class="key">⭐ Rating</span><span class="value">4.2 / 5.0</span></div>
+        <div class="info-row"><span class="key">📝 Tổng reviews</span><span class="value">2,629</span></div>
+        <div class="info-row"><span class="key">🏷️ Category</span><span class="value">Night club</span></div>
+        <div class="info-row"><span class="key">💰 Price</span><span class="value">$$ (Moderately priced)</span></div>
+        <div class="info-row"><span class="key">🏳️‍🌈 LGBTQ+ friendly</span><span class="value">✅ Có</span></div>
+      </div>
+      <div>
+        <div class="info-row"><span class="key">📍 Địa chỉ</span><span class="value">325 Trần Hưng Đạo, An Hải</span></div>
+        <div class="info-row"><span class="key">📞 Phone</span><span class="value">+84 901 770 000</span></div>
+        <div class="info-row"><span class="key">🌐 Website</span><span class="value">facebook.com</span></div>
+        <div class="info-row"><span class="key">🕐 Hours</span><span class="value">8PM - 4AM</span></div>
+        <div class="info-row"><span class="key">📸 Instagram</span><span class="value">@newgoldenpine</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. STATS CARDS -->
+  <div class="grid-4" style="margin-bottom:24px;">
+    <div class="stat-card">
+      <div class="number green">4.2</div>
+      <div class="label">Rating</div>
+    </div>
+    <div class="stat-card">
+      <div class="number">2,629</div>
+      <div class="label">Reviews</div>
+    </div>
+    <div class="stat-card">
+      <div class="number amber">2</div>
+      <div class="label">Secondary Categories</div>
+    </div>
+    <div class="stat-card">
+      <div class="number red">0/5</div>
+      <div class="label">Keywords in Top 6</div>
+    </div>
+  </div>
+
+  <!-- 3. RANKINGS -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🔍</span> Google Maps Rankings — Top 6 Results</div>
+    <table class="ranking-table">
+      <tr><th>Keyword</th><th>Top Competitors</th><th>Golden Pine?</th><th>Status</th></tr>
+      <tr>
+        <td><strong>danang pub</strong></td>
+        <td style="font-size:11px;color:#888;">Shamrock Sports Bar, Marine Sky Bar, The Roof, Sky 21, ADM CLUB, Da Nang Rooftop</td>
+        <td><span class="status-dot red"></span> Không</td>
+        <td><span class="badge red">Out of Top 6</span></td>
+      </tr>
+      <tr>
+        <td><strong>danang night club</strong></td>
+        <td style="font-size:11px;color:#888;">New Phương Đông, OQ Club, ADM CLUB, Sugar Social Club, For You Club, GINZA Bar</td>
+        <td><span class="status-dot red"></span> Không</td>
+        <td><span class="badge red">Out of Top 6</span></td>
+      </tr>
+      <tr>
+        <td><strong>danang bar</strong></td>
+        <td style="font-size:11px;color:#888;">Sky 21, The Roof, Tê Bar, Gypsy Rooftop, Malibu Beach Club, LIBRE Bar</td>
+        <td><span class="status-dot red"></span> Không</td>
+        <td><span class="badge red">Out of Top 6</span></td>
+      </tr>
+      <tr>
+        <td><strong>danang nightlife</strong></td>
+        <td style="font-size:11px;color:#888;">For You Club, New Phương Đông, Locus Cocktail, Sky 21, The Roof, ADM CLUB</td>
+        <td><span class="status-dot red"></span> Không</td>
+        <td><span class="badge red">Out of Top 6</span></td>
+      </tr>
+      <tr>
+        <td><strong>danang club</strong></td>
+        <td style="font-size:11px;color:#888;">New Phương Đông, ADM CLUB, For You Club, Sugar Social Club, Malibu Beach Club, Club SEVEN DRAGON</td>
+        <td><span class="status-dot red"></span> Không</td>
+        <td><span class="badge red">Out of Top 6</span></td>
+      </tr>
+    </table>
+    <div style="margin-top:12px;font-size:11px;color:#555;text-align:center;">
+      * Google Maps unsigned chỉ hiển thị ~6 kết quả. Có thể Golden Pine đứng ở vị trí thấp hơn.
+    </div>
+  </div>
+
+  <!-- 4. REVIEW ANALYSIS -->
+  <div class="section">
+    <div class="section-title"><span class="icon">⭐</span> Review Distribution</div>
+    <div class="grid-2">
+      <div>
+        <div class="review-bar-wrap">
+          <div class="review-bar-label"><span class="rstar">★★★★★</span><span class="rcount">1,628 (62%)</span></div>
+          <div class="review-bar"><div class="review-bar-fill" style="width:62%"></div></div>
+        </div>
+        <div class="review-bar-wrap">
+          <div class="review-bar-label"><span class="rstar">★★★★☆</span><span class="rcount">474 (18%)</span></div>
+          <div class="review-bar"><div class="review-bar-fill" style="width:18%"></div></div>
+        </div>
+        <div class="review-bar-wrap">
+          <div class="review-bar-label"><span class="rstar">★★★☆☆</span><span class="rcount">217 (8%)</span></div>
+          <div class="review-bar"><div class="review-bar-fill" style="width:8%"></div></div>
+        </div>
+        <div class="review-bar-wrap">
+          <div class="review-bar-label"><span class="rstar">★★☆☆☆</span><span class="rcount">~180 (7%)</span></div>
+          <div class="review-bar"><div class="review-bar-fill" style="width:7%"></div></div>
+        </div>
+        <div class="review-bar-wrap">
+          <div class="review-bar-label"><span class="rstar">★☆☆☆☆</span><span class="rcount">~130 (5%)</span></div>
+          <div class="review-bar"><div class="review-bar-fill" style="width:5%"></div></div>
+        </div>
+      </div>
+      <div>
+        <div style="background:rgba(255,255,255,0.03);border-radius:10px;padding:16px;">
+          <div style="font-size:13px;color:#888;margin-bottom:10px;">✅ Tổng quan reviews</div>
+          <div style="font-size:13px;color:#aaa;line-height:1.6;">
+            • <strong style="color:#34d399;">80%</strong> reviews 4-5★ — rất tốt<br>
+            • <strong style="color:#fbbf24;">8%</strong> reviews 3★ — trung bình<br>
+            • <strong style="color:#e94560;">~12%</strong> reviews 1-2★ — cần theo dõi<br>
+            • Review gần nhất tiếng Hàn (khách Hàn Quốc) 🎯<br>
+            • Owner có đăng bài recent (Apr 8)<br>
+            • Cần <strong style="color:#e94560;">reply tất cả reviews</strong> để tăng engagement signal
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. GBP ATTRIBUTES -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🏪</span> GBP Attributes hiện tại</div>
+    <div class="grid-3">
+      <div>
+        <div style="font-size:12px;color:#e94560;font-weight:600;margin-bottom:8px;">✅ HIGHLIGHTS</div>
+        <div style="font-size:12px;color:#aaa;line-height:1.8;">
+          • Great beer selection 🍺<br>
+          • Great cocktails 🍸<br>
+          • Great wine list 🍷<br>
+          • Live music 🎵<br>
+          • Live performances 🎤
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;color:#e94560;font-weight:600;margin-bottom:8px;">✅ SERVICE OPTIONS</div>
+        <div style="font-size:12px;color:#aaa;line-height:1.8;">
+          • Outdoor seating<br>
+          • Dine-in / Takeout / Delivery<br>
+          • Table service<br>
+          • Dancing area<br>
+          • Wi-Fi
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;color:#e94560;font-weight:600;margin-bottom:8px;">✅ AMENITIES</div>
+        <div style="font-size:12px;color:#aaa;line-height:1.8;">
+          • LGBTQ+ friendly 🏳️‍🌈<br>
+          • Gender-neutral restroom<br>
+          • Wheelchair accessible<br>
+          • Credit/Debit/NFC payments<br>
+          • Tourists & Groups welcome
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. KEY RECOMMENDATIONS -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🎯</span> Recommendations — Cải thiện Ranking</div>
+
+    <div class="recommendation">
+      <div class="rec-title">1. Thêm Secondary Categories</div>
+      <div class="rec-desc">
+        Hiện tại chỉ có <strong>Night club</strong> là primary category. Google Maps ranking ưu tiên business có secondary categories khớp với search query. <strong>Cần thêm:</strong> Bar, Pub, Cocktail Bar, Live Music Venue, Karaoke Bar, Dance Club. Vào <em>Suggest an edit → About → Category</em> để thêm.
+      </div>
+      <span class="rec-tag high">URGENT — Tuần này</span>
+    </div>
+
+    <div class="recommendation">
+      <div class="rec-title">2. Tăng Review Velocity</div>
+      <div class="rec-desc">
+        2,629 reviews là con số tốt, nhưng Google ưu tiên <strong>review gần đây</strong>. Cần duy trì đều đặn 5-10 reviews/tuần. Khuyến khích khách chụp ảnh + để review có từ khóa như "best nightclub in Da Nang", "best pub Da Nang". <strong>Quan trọng:</strong> reply ALL reviews trong 24-72h (cả 5★ lẫn 1★).
+      </div>
+      <span class="rec-tag high">URGENT — Ongoing</span>
+    </div>
+
+    <div class="recommendation">
+      <div class="rec-title">3. Website riêng thay vì Facebook</div>
+      <div class="rec-desc">
+        Website hiện tại chỉ là facebook.com. Google ưu tiên business có website riêng với <strong>LocalBusiness schema markup</strong>, Google Maps embed, và nội dung địa phương. Một landing page đơn giản với schema + embed + backlinks từ local directory sẽ boost ranking đáng kể.
+      </div>
+      <span class="rec-tag high">URGENT — 1-2 tuần</span>
+    </div>
+
+    <div class="recommendation">
+      <div class="rec-title">4. Google Posts đều đặn</div>
+      <div class="rec-desc">
+        Owner có đăng bài (Camp Rock event Apr 8), nhưng cần <strong>2-3 posts/tuần</strong>: sự kiện, promotion, live show, video. Google Posts là tín hiệu recency quan trọng cho ranking. Post có video được weight cao hơn.
+      </div>
+      <span class="rec-tag med">MEDIUM — Weekly</span>
+    </div>
+
+    <div class="recommendation">
+      <div class="rec-title">5. Tăng Photos & Videos</div>
+      <div class="rec-desc">
+        Cần 100+ photos chất lượng cao, update hàng tuần. <strong>Video clip</strong> từ khách (tagged) có weight cao nhất. Khuyến khích khách quay clip và tag Google Maps.
+      </div>
+      <span class="rec-tag med">MEDIUM — Weekly</span>
+    </div>
+
+    <div class="recommendation">
+      <div class="rec-title">6. NAP Consistency Check</div>
+      <div class="rec-desc">
+        Kiểm tra Name, Address, Phone giống nhau 100% trên: Facebook, TripAdvisor, foody.vn, pasgo.vn, Booking.com, Instagram. Chỉ cần sai 1 ký tự là Google giảm trust.
+      </div>
+      <span class="rec-tag med">MEDIUM — 1 tuần</span>
+    </div>
+
+    <div class="recommendation">
+      <div class="rec-title">7. Q&A tự populate</div>
+      <div class="rec-desc">
+        Thêm 10-15 câu hỏi & trả lời tự động trên GBP Q&A với từ khóa target: "What are the best cocktails in Da Nang?", "Best nightclub near An Hai beach?", etc.
+      </div>
+      <span class="rec-tag low">LOW — Khi có thời gian</span>
+    </div>
+  </div>
+
+  <!-- 7. COMPETITORS -->
+  <div class="section">
+    <div class="section-title"><span class="icon">👥</span> Top Competitors trên Google Maps</div>
+    <div class="grid-3">
+      <div class="competitor">
+        <div class="name">ADM CLUB</div>
+        <div class="detail">Xuất hiện: pub, night club, nightlife, club</div>
+        <div class="rank rank-1">#1-3</div>
+      </div>
+      <div class="competitor">
+        <div class="name">New Phương Đông</div>
+        <div class="detail">Xuất hiện: night club, nightlife, club</div>
+        <div class="rank rank-1">#1-2</div>
+      </div>
+      <div class="competitor">
+        <div class="name">Sky 21 Bar & Bistro</div>
+        <div class="detail">Xuất hiện: pub, bar, nightlife</div>
+        <div class="rank rank-2">#1-4</div>
+      </div>
+      <div class="competitor">
+        <div class="name">The Roof - Da Nang</div>
+        <div class="detail">Xuất hiện: pub, bar, nightlife</div>
+        <div class="rank rank-2">#2-5</div>
+      </div>
+      <div class="competitor">
+        <div class="name">For You Club</div>
+        <div class="detail">Xuất hiện: night club, nightlife, club</div>
+        <div class="rank rank-1">#1-4</div>
+      </div>
+      <div class="competitor">
+        <div class="name">Shamrock Sports Bar</div>
+        <div class="detail">Xuất hiện: pub (#1)</div>
+        <div class="rank rank-1">#1 pub</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. KOREAN TOURIST STRATEGY -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🇰🇷</span> Korean Tourist Opportunity</div>
+    <div style="font-size:13px;color:#aaa;line-height:1.7;">
+      <p>Phát hiện: review gần nhất bằng tiếng Hàn, và business đã có hashtag <strong>#다낭클럽 #한국인</strong> trong post. Đây là cơ hội rất lớn!</p>
+      <br>
+      <p><strong>Korean tourists</strong> dùng <strong>KakaoTalk</strong> (96%), <strong>Naver</strong> (#1 search engine Hàn Quốc), <strong>LINE</strong>. Hầu như không bar/club nào ở Đà Nẵng cạnh tranh trên các nền tảng này.</p>
+      <br>
+      <p><strong>Gợi ý:</strong></p>
+      <ul style="margin-left:20px;line-height:1.8;">
+        <li>Tạo KakaoTalk Channel + LINE Official Account</li>
+        <li>Thêm Naver Place listing</li>
+        <li>Viết mô tả GBP bằng tiếng Hàn (song ngữ)</li>
+        <li>Hợp tác KOL Hàn Quốc tại Đà Nẵng</li>
+        <li>Ưu đãi đặc biệt cho khách Hàn (Soju promotion, K-pop night)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 9. EXECUTION PLAN -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📅</span> Execution Plan — Team of One</div>
+    <div class="grid-2">
+      <div style="background:rgba(255,255,255,0.02);border-radius:10px;padding:16px;">
+        <div style="font-size:14px;color:#e94560;font-weight:700;margin-bottom:12px;">🔥 Tuần 1-2</div>
+        <div style="font-size:12px;color:#aaa;line-height:1.8;">
+          ☐ Thêm secondary categories (Bar, Pub, Cocktail Bar, etc.)<br>
+          ☐ Tạo website landing page với LocalBusiness schema<br>
+          ☐ Reply tất cả reviews chưa response<br>
+          ☐ Đăng 2 Google Posts (sự kiện tuần tới)<br>
+          ☐ Kiểm tra NAP consistency<br>
+          ☐ Setup review collection system
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.02);border-radius:10px;padding:16px;">
+        <div style="font-size:14px;color:#fbbf24;font-weight:700;margin-bottom:12px;">📈 Tuần 3-4</div>
+        <div style="font-size:12px;color:#aaa;line-height:1.8;">
+          ☐ Populate Q&A (10-15 questions)<br>
+          ☐ Update 100+ photos (professional)<br>
+          ☐ Google Posts 2-3x/tuần<br>
+          ☐ Start review response routine<br>
+          ☐ Citation building (foody, pasgo, etc.)<br>
+          ☐ Duy trì 5-10 reviews/tuần
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.02);border-radius:10px;padding:16px;">
+        <div style="font-size:14px;color:#34d399;font-weight:700;margin-bottom:12px;">🚀 Tháng 2</div>
+        <div style="font-size:12px;color:#aaa;line-height:1.8;">
+          ☐ Backlinks từ local tourism sites<br>
+          ☐ Korean tourist channels (KakaoTalk, Naver)<br>
+          ☐ KOL collaboration (Korean + local)<br>
+          ☐ Google Ads test cho brand keywords<br>
+          ☐ Check ranking changes → adjust strategy
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.02);border-radius:10px;padding:16px;">
+        <div style="font-size:14px;color:#22d3ee;font-weight:700;margin-bottom:12px;">🏆 Tháng 3</div>
+        <div style="font-size:12px;color:#aaa;line-height:1.8;">
+          ☐ Đánh giá lại rankings<br>
+          ☐ TripAdvisor optimization<br>
+          ☐ Review velocity automation<br>
+          ☐ Scale KOL partnerships<br>
+          ☐ Monthly report + next quarter plan
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Nô Tì · Hermes Agent · New Golden Pine Pub &copy; 2026
+  </div>
+
+</div>
+</body>
+</html>
